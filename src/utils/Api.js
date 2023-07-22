@@ -1,7 +1,8 @@
 class Api {
-    constructor({headers, myUrl}) {
+    constructor({headers, myUrl, authUrl}) {
         this._headers = headers;
         this._myUrl = myUrl;
+        this._authUrl = authUrl;
     }
 
     _getResponseData(res) {
@@ -84,6 +85,48 @@ class Api {
         return this._getResponseData(res);
       })
     }
+
+    register(email, password) {
+      return fetch(`${this._authUrl}/signup`, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      })
+      .then(res => {
+        return this._getResponseData(res);
+      })
+    }
+
+    login(email, password) {
+      return fetch(`${this._authUrl}/signin`, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      })
+      .then(res => {
+        return this._getResponseData(res);
+      })
+    }
+
+    checkToken(token) {
+      return fetch(`${this._authUrl}/users/me`, {
+        method: "GET",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+      })
+      .then(res => {
+        return this._getResponseData(res);
+      })
+    }
 }
 const api = new Api({
   headers: {
@@ -91,6 +134,7 @@ const api = new Api({
     'Content-Type': 'application/json',
   },
   myUrl: 'https://mesto.nomoreparties.co/v1/cohort-63',
+  authUrl: 'https://auth.nomoreparties.co',
 });
 
 export default api;

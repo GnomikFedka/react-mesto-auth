@@ -17,6 +17,7 @@
 form input.popup__input:last-of-type {
   margin-top: 2px;
 }
+
 .popup__input:focus { 
   outline: 1px solid blue;
   border: 1px solid #FFFFFF;
