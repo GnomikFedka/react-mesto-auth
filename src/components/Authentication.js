@@ -7,10 +7,17 @@ export default function Authentication(props) {
     password: "",
   });
 
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    if (isValid) {
+      props.onSubmit(values.email, values.password);
+    }
+  }
+
   return (
     <>
     <Form name={props.name} title={props.title} isValid={isValid} buttonText={props.buttonText}
-      onSubmit={props.handleSubmit}>
+      onSubmit={handleSubmit}>
         <Input type="email" id="login-input" name="email" value={values.email || ""} onChange={handleChange}
           minLength="2" maxLength="30" errorMessage={errors.email} placeholder="Email"/>
         <Input type="password" id="password" name="password" value={values.password || ""} onChange={handleChange}
