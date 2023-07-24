@@ -9,7 +9,7 @@ export default function Header(props) {
         <Route
           path="/"
           element={
-            <>
+            <div className="header__info">
               <p className="header__email">{props.currentUserEmail}</p>
               <Link
                 className="header__sign header__sign_exit"
@@ -17,7 +17,7 @@ export default function Header(props) {
               >
                 Выйти
               </Link>
-            </>
+            </div>
           }
         />
         <Route

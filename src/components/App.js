@@ -163,6 +163,7 @@ function App() {
         if (res) {
           localStorage.setItem("jwt", res.token);
           setIsLoggedIn(true);
+          setCurrentUserEmail(email);
           navigate("/", { replace: true });
         }
       })
@@ -176,6 +177,7 @@ function App() {
   function handleLogout() {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
+    setCurrentUserEmail("");
     navigate("/sign-in", { replace: true });
   }
 
